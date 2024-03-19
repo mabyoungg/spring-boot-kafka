@@ -1,7 +1,6 @@
 package com.example.springbootkafka.domain.post.post.service;
 
 import com.example.springbootkafka.domain.member.member.entity.Member;
-import com.example.springbootkafka.domain.member.member.service.MemberService;
 import com.example.springbootkafka.domain.post.post.entity.Author;
 import com.example.springbootkafka.domain.post.post.entity.Post;
 import com.example.springbootkafka.domain.post.post.repository.PostRepository;
@@ -19,11 +18,10 @@ public class PostService {
     private final PostRepository postRepository;
     @PersistenceContext
     private EntityManager entityManager;
-    private final MemberService memberService;
 
     @Transactional
     public RsData<Post> write(Author author, String title) {
-        memberService.increasePostsCount(author.getId());
+        author.increasePostsCount();
 
         return RsData.of(
                 postRepository.save(

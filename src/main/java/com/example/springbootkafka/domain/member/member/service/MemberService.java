@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -28,5 +30,16 @@ public class MemberService {
 
     public long count() {
         return memberRepository.count();
+    }
+
+    @Transactional
+    public void increasePostsCount(long id) {
+        findById(id).ifPresent(member -> {
+            member.increasePostsCount();
+        });
+    }
+
+    private Optional<Member> findById(long id) {
+        return memberRepository.findById(id);
     }
 }

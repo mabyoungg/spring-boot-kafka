@@ -1,5 +1,6 @@
 package com.example.springbootkafka.domain.post.post.entity;
 
+import com.example.springbootkafka.domain.post.post.author.entity.Author;
 import com.example.springbootkafka.global.jpa.entity.BaseTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

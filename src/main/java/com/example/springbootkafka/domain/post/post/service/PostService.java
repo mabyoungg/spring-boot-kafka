@@ -1,7 +1,7 @@
 package com.example.springbootkafka.domain.post.post.service;
 
 import com.example.springbootkafka.domain.member.member.entity.Member;
-import com.example.springbootkafka.domain.post.post.entity.Author;
+import com.example.springbootkafka.domain.post.post.author.entity.Author;
 import com.example.springbootkafka.domain.post.post.entity.Post;
 import com.example.springbootkafka.domain.post.post.repository.PostRepository;
 import com.example.springbootkafka.global.event.PostCreatedEvent;

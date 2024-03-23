@@ -23,6 +23,11 @@ public class NotiEventListener {
 
     @KafkaListener(topics = "chat-room-1", groupId = "1")
     public void consume(String message) {
-        System.out.println("message: " + message);
+        System.out.println("consume message: " + message);
+    }
+
+    @KafkaListener(topics = "chat-room-1", groupId = "2")
+    public void consume2(String message) {
+        System.out.println("consume2 message: " + message);
     }
 }

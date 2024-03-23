@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class PostService {
     @PersistenceContext
     private EntityManager entityManager;
     private final ApplicationEventPublisher publisher;
+    private final KafkaTemplate<Object, Object> template;
 
     @Transactional
     public RsData<Post> write(Author author, String title) {
@@ -34,6 +36,7 @@ public class PostService {
         );
 
         publisher.publishEvent(new PostCreatedEvent(this, post));
+        template.send("chat-room-1", post.getId() + "번 글이 생성되었습니다.");
 
         return RsData.of(post);
     }
